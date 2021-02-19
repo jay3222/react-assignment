@@ -34,7 +34,8 @@ const deleteUser = async(id) =>{
     console.log(params)
 
     await axios.get('https://k6j938wg66.execute-api.us-east-1.amazonaws.com/v1/delete',{params})
-    history.push('/')
+    alert(`Are you Sure You Want to Delete this Contact`);
+    await loadUsers();
 }
 
 // let a=1;
@@ -77,7 +78,7 @@ const deleteUser = async(id) =>{
       <Button className="ui primary button" as={Link} to= {`/edit/${index}`}>
   Edit
 </Button>
-<Button className="ui red button" as={Link} onClick={()=>deleteUser(user.email)}>
+<Button className="ui negative button" as={Link} onClick={()=>deleteUser(user.email)}>
   Delete
 </Button>
 </Table.Cell>
