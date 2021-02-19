@@ -3,6 +3,7 @@ import {Table,Button} from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import {useHistory,useParams} from 'react-router-dom'
+import 'semantic-ui-css/semantic.min.css'
 
 const StudentTable = () => {
     let history = useHistory()
@@ -26,7 +27,9 @@ console.log(result.data.data)
 
 const deleteUser = async(id) =>{
     const params ={
-        param1:id
+        param1:id,
+        
+        
     }
     console.log(params)
 
@@ -38,8 +41,8 @@ const deleteUser = async(id) =>{
     return(
         
 <Table singleLine>
-    <Table.Header>
-      <Table.Row>
+    <Table.Header className="ui selectable inverted blue table">
+      <Table.Row >
       <Table.HeaderCell>#</Table.HeaderCell>
         <Table.HeaderCell>First Name</Table.HeaderCell>
         <Table.HeaderCell> Last Name</Table.HeaderCell>
@@ -71,10 +74,10 @@ const deleteUser = async(id) =>{
       <Table.Cell>{user.city}</Table.Cell>
       <Table.Cell>{user.pincode}</Table.Cell>
       <Table.Cell>
-      <Button class="ui primary button" as={Link} to= {`/edit/${index}`}>
+      <Button className="ui primary button" as={Link} to= {`/edit/${index}`}>
   Edit
 </Button>
-<Button class="ui red button" as={Link} onClick={()=>deleteUser(user.email)}>
+<Button className="ui red button" as={Link} onClick={()=>deleteUser(user.email)}>
   Delete
 </Button>
 </Table.Cell>

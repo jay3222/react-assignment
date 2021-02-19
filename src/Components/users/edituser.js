@@ -83,7 +83,7 @@ return (
       id='form-input-control-error-email'
       control={Input}
       label='Email'
-      placeholder='joe@schmoe.com'
+     disabled placeholder='joe@schmoe.com'
     //   error={{
     //     content: 'Please enter a valid email address',
     //     pointing: 'below',

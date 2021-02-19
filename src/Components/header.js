@@ -14,7 +14,7 @@ import { Link } from 'react-router-dom'
         </Header>
 
 
-        <Button as={Link} to='/adduser'>
+        <Button className="ui primary button" as={Link} to='/adduser'>
   Add User
 </Button>
       </Segment>
