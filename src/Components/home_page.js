@@ -1,5 +1,5 @@
 import React,{useState, useEffect} from 'react'
-import {Table,Button} from 'semantic-ui-react'
+import {Table,Button,Input} from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import {useHistory,useParams} from 'react-router-dom'
@@ -8,21 +8,28 @@ import 'semantic-ui-css/semantic.min.css'
 const StudentTable = () => {
     let history = useHistory()
  const [users,setUsers] =useState([]);
+ const [search,setSearch]=useState("");
+ 
 
  useEffect(() => {
 console.log("")
 loadUsers();
 
+
  },[]);
 const loadUsers = async() => {
-    const result = await axios.get("https://j5ej5u32gg.execute-api.us-east-1.amazonaws.com/v1/fetch")
-// console.log(result.data.data[0]);
-// let ur =result.data.data
-//  ur.map()
-var i=1
-
-setUsers(result.data.data)
+    const result = await axios.get(`https://j5ej5u32gg.execute-api.us-east-1.amazonaws.com/v1/fetch`)
+  setUsers(result.data.data)
 console.log(result.data.data)
+}
+
+
+const InputEvent=(e)=>{
+  console.log(e.target.value);
+  setSearch(e.target.value)
+
+  
+
 }
 
 const deleteUser = async(id) =>{
@@ -40,6 +47,13 @@ const deleteUser = async(id) =>{
 
 // let a=1;
     return(
+      <>
+      <Input placeholder='Search...'
+name="search"
+value={search}
+onChange={InputEvent}
+ 
+ />
         
 <Table singleLine>
     <Table.Header className="ui selectable inverted blue table">
@@ -64,7 +78,26 @@ const deleteUser = async(id) =>{
       </Table.Row> */}
        
 
-    { users.map((user,index) => (
+     { users.filter((user)=>{
+      if(search==""){
+        return user
+      }else if (user.first_name.toLowerCase().includes(search.toLowerCase())){
+          return user
+        }else if (user.last_name.toLowerCase().includes(search.toLowerCase())){
+          return user
+        }else if (user.email.toLowerCase().includes(search.toLowerCase())){
+          return user
+        }
+        else if (user.states.toLowerCase().includes(search.toLowerCase())){
+          return user
+        }
+        else if (user.city.toLowerCase().includes(search.toLowerCase())){
+          return user
+        }
+        else if (user.pincode.toLowerCase().includes(search.toLowerCase())){
+          return user
+        }}
+).map((user,index)=>(
       
      <Table.Row >
      <Table.Cell>{index + 1}</Table.Cell>
@@ -84,11 +117,11 @@ const deleteUser = async(id) =>{
 </Table.Cell>
    </Table.Row>
 
-      ) )} *
+      ) )} 
     </Table.Body>
     </Table>
 
-
+</>
     )
 
 }
